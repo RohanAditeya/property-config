@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: book-wishlist
+  datasource:
+    url: jdbc:postgresql://free-tier12.aws-ap-south-1.cockroachlabs.cloud:26257/book-wishlist-258.books_dev?sslmode=verify-full&sslrootcert=${cockroach.sslrootcert}
+    username: rohan
+    password: ${cockroach.password}
+  jpa:
+    database-platform: org.hibernate.dialect.CockroachDB201Dialect
+server:
+  port: 8091
+management:
+  endpoints:
+    web:
+      exposure:
+        include: conditions, health, info, metrics
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 5
